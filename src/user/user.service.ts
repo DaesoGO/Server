@@ -12,17 +12,16 @@ import { UserDto } from './dto/user.dto';
 import { User } from './entities/user.entitiy';
 import { UserRepository } from './repositories/user.repository';
 import { InfLoginResponse } from './responses/login.response';
-import { UserController } from './user.controller';
 
 @Injectable()
 export class UserService {
   constructor(
     private readonly tokenService: TokenService,
-    private readonly userPepository: UserRepository,
+    private readonly userRepository: UserRepository,
   ) {}
 
   public async register(dto: UserDto): Promise<void> {
-    const user: undefined | User = await this.userPepository.findOne(dto.id);
+    const user: undefined | User = await this.userRepository.findOne(dto.id);
 
     if (!validationNullORUndefined(user)) {
       throw new ForbiddenException('충복된 계정입니다');
@@ -31,11 +30,11 @@ export class UserService {
     const passwordHash = await bcrypt.hash(dto.password, 5);
     dto.password = passwordHash;
 
-    await this.userPepository.save(dto);
+    await this.userRepository.save(dto);
   }
 
   public async login(dto: loginDto): Promise<InfLoginResponse> {
-    const user: undefined | User = await this.userPepository.findOne({
+    const user: undefined | User = await this.userRepository.findOne({
       where: { id: dto.id },
     });
 
@@ -56,7 +55,7 @@ export class UserService {
   }
 
   public async getUserByUserID(userEmail: string): Promise<User> {
-    const user: undefined | User = await this.userPepository.findOne({
+    const user: undefined | User = await this.userRepository.findOne({
       where: { email: userEmail },
     });
 

@@ -11,17 +11,17 @@ import {
 
 @Entity()
 export class Diary {
-  @PrimaryGeneratedColumn()
-  di_id: number;
+  @PrimaryGeneratedColumn({ name: 'di_id' })
+  id: number;
 
-  @Column({ length: 6000 })
-  di_content: string;
+  @Column({ length: 6000, name: 'di_content' })
+  content: string;
 
-  @Column({ length: 300 })
-  di_prhoto: string;
+  @Column({ length: 300, name: 'di_photo' })
+  photo: string;
 
-  @Column({ length: 50 })
-  di_createdAt: string;
+  @Column({ name: 'di_createAt' })
+  createdAt: Date;
 
   @ManyToOne(() => User, (user) => user.diary, { nullable: false })
   user: User;

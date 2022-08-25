@@ -8,4 +8,8 @@ export class diaryDto {
   @IsString()
   @IsEmpty()
   photo!: string;
+
+  @IsString()
+  @IsEmpty()
+  createdAt: Date;
 }

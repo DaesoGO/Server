@@ -1,5 +1,5 @@
 import { Diary } from 'src/diary/entities/diary.entitiy';
-import { Column, Entity, JoinTable, OneToMany, PrimaryColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryColumn } from 'typeorm';
 
 @Entity()
 export class User {

@@ -36,7 +36,7 @@ export class UserController {
     return DataResponse.dataSuccesss('로그인 성공', loginRes);
   }
 
-  @UseGuards(AuthGuard)
+  // @UseGuards(AuthGuard)
   @Get('test')
   async test(@Token() user: User): Promise<void> {
     console.log(user);
