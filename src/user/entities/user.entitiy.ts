@@ -21,6 +21,9 @@ export class User {
   @Column({ length: 200 })
   interest: string;
 
+  @Column()
+  diary_pu_yn: boolean;
+
   @OneToMany(() => Diary, (diary) => diary.user)
   diary: Diary[];
 }

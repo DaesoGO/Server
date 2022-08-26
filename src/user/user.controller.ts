@@ -24,6 +24,7 @@ export class UserController {
 
   @Post('register')
   async register(@Body() dto: UserDto): Promise<Response> {
+    console.log(dto);
     await this.userService.register(dto);
 
     return Response.success('회원가입 성공');
@@ -36,7 +37,7 @@ export class UserController {
     return DataResponse.dataSuccesss('로그인 성공', loginRes);
   }
 
-  // @UseGuards(AuthGuard)
+  @UseGuards(AuthGuard)
   @Get('test')
   async test(@Token() user: User): Promise<void> {
     console.log(user);

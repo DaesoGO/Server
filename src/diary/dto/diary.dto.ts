@@ -1,4 +1,5 @@
-import { IsEmpty, IsString } from 'class-validator';
+import { IsDate, IsEmpty, IsString } from 'class-validator';
+import { User } from 'src/user/entities/user.entitiy';
 
 export class diaryDto {
   @IsString()
@@ -9,7 +10,9 @@ export class diaryDto {
   @IsEmpty()
   photo!: string;
 
-  @IsString()
-  @IsEmpty()
+  @IsDate()
   createdAt: Date;
+
+  @IsString()
+  userId: User;
 }

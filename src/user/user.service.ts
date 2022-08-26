@@ -56,7 +56,7 @@ export class UserService {
 
   public async getUserByUserID(userEmail: string): Promise<User> {
     const user: undefined | User = await this.userRepository.findOne({
-      where: { email: userEmail },
+      where: { id: userEmail },
     });
 
     if (validationNullORUndefined(user)) {

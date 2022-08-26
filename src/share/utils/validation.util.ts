@@ -4,3 +4,13 @@ export const validationNullORUndefined = (data?: string | object): boolean => {
   }
   return false;
 };
+
+export const validataionTwoValueNullORUndefined = (
+  dataFi: string | object,
+  dataSc: string | object,
+): boolean => {
+  if (dataFi !== dataSc) {
+    return true;
+  }
+  return false;
+};
