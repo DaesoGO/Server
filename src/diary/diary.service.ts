@@ -98,11 +98,15 @@ export class DiaryService {
   // }
 
   public async diaryDelete(user: User, id: string): Promise<void> {
-    const diary: undefined | Diary[] = await this.diaryRepository.find({
+    const diary = await this.diaryRepository.find({
       where: { id },
       relations: ['user'],
     });
 
-    console.log(diary);
+    if (user.id !== diary[0].user.id) {
+      throw new UnauthorizedException('게시글이 다른 소유자입니다.');
+    }
+
+    await this.diaryRepository.remove(diary);
   }
 }
