@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Post,
@@ -22,7 +23,7 @@ export class DiaryController {
   constructor(private readonly diaryService: DiaryService) {}
 
   @UseGuards(AuthGuard)
-  @Post('/:id/upload')
+  @Post('/:id')
   async diaryUpload(
     @Token() user: User,
     @Body() dto: diaryDto,
@@ -33,7 +34,7 @@ export class DiaryController {
   }
 
   @UseGuards(AuthGuard)
-  @Get('/:id/list')
+  @Get('/:id')
   async diaryList(
     @Token() user: User,
     @Param() param,
@@ -44,7 +45,7 @@ export class DiaryController {
   }
 
   @UseGuards(AuthGuard)
-  @Get('/:userid/:id/listOne')
+  @Get('/:userid/:id')
   async diaryListOne(
     @Token() user: User,
     @Param() param,
@@ -54,11 +55,23 @@ export class DiaryController {
     return DataResponse.dataSuccesss('조회 성공', listOne);
   }
 
-  @UseGuards(AuthGuard)
-  @Put('/:userid/id/update')
-  async diaryUpdate(@Body() dto: diaryDto, @Param() param): Promise<Response> {
-    await this.diaryService.diaryUpdate(dto, param);
+  // @UseGuards(AuthGuard)
+  // @Put('/:userid/id')
+  // async diaryUpdate(
+  //   @Token() user: User,
+  //   @Body() dto: diaryDto,
+  //   @Param() param,
+  // ): Promise<Response> {
+  //   await this.diaryService.diaryUpdate(user, dto, param);
 
-    return Response.success('글 정보 수정');
+  //   return Response.success('글 정보 수정');
+  // }
+
+  @UseGuards(AuthGuard)
+  @Delete('/:id')
+  async diaryDelete(@Token() user: User, @Param() param): Promise<Response> {
+    await this.diaryService.diaryDelete(user, param.id);
+
+    return Response.success('일기가 성공적으로 삭제되었습니다.');
   }
 }

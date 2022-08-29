@@ -84,7 +84,25 @@ export class DiaryService {
     return listOne;
   }
 
-  public async diaryUpdate(dto: diaryDto, param): Promise<void> {
-    const diary: Diary | undefined = await this.diaryRepository.findOne();
+  // public async diaryUpdate(user: User, dto: diaryDto, param): Promise<void> {
+  //   const diary: Diary | undefined = await this.diaryRepository.findOne(
+  //     param.id,
+  //   );
+
+  //   if (user.id !== param.userid) {
+  //     throw new UnauthorizedException('다른 사람의 계정입니다.');
+  //   }
+
+  //   this.diaryRepository.merge(diary, dto);
+  //   await this.diaryRepository.save(diary);
+  // }
+
+  public async diaryDelete(user: User, id: string): Promise<void> {
+    const diary: undefined | Diary[] = await this.diaryRepository.find({
+      where: { id },
+      relations: ['user'],
+    });
+
+    console.log(diary);
   }
 }
