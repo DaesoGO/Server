@@ -24,7 +24,6 @@ export class UserController {
 
   @Post('register')
   async register(@Body() dto: UserDto): Promise<Response> {
-    console.log(dto);
     await this.userService.register(dto);
 
     return Response.success('회원가입 성공');

@@ -4,6 +4,7 @@ import {
   Get,
   Param,
   Post,
+  Put,
   Query,
   UseGuards,
 } from '@nestjs/common';
@@ -51,5 +52,13 @@ export class DiaryController {
     const listOne = await this.diaryService.diaryListOne(user, param);
 
     return DataResponse.dataSuccesss('조회 성공', listOne);
+  }
+
+  @UseGuards(AuthGuard)
+  @Put('/:userid/id/update')
+  async diaryUpdate(@Body() dto: diaryDto, @Param() param): Promise<Response> {
+    await this.diaryService.diaryUpdate(dto, param);
+
+    return Response.success('글 정보 수정');
   }
 }

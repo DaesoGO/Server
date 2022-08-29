@@ -24,4 +24,8 @@ export class UserDto {
   @IsString()
   @IsEmpty()
   interest!: string;
+
+  @IsString()
+  @IsEmpty()
+  diary_pu_yn!: boolean;
 }
