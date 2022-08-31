@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 import { InfToken } from 'src/share/interfaces/InfToken';
 import { validationNullORUndefined } from 'src/share/utils/validation.util';
 import { TokenService } from 'src/token/token.service';
-import { User } from 'src/user/entities/user.entitiy';
+import { User } from 'src/user/entities/user.entity';
 import { UserService } from 'src/user/user.service';
 
 @Injectable()

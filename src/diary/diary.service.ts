@@ -9,7 +9,7 @@ import {
   validationNullORUndefined,
 } from 'src/share/utils/validation.util';
 import { TokenService } from 'src/token/token.service';
-import { User } from 'src/user/entities/user.entitiy';
+import { User } from 'src/user/entities/user.entity';
 import { UserRepository } from 'src/user/repositories/user.repository';
 import { diaryDto } from './dto/diary.dto';
 import { Diary } from './entities/diary.entitiy';

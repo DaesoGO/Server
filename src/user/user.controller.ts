@@ -14,7 +14,7 @@ import DataResponse from 'src/common/response/DataResponse';
 import Response from 'src/common/response/response';
 import { loginDto } from './dto/login.dto';
 import { UserDto } from './dto/user.dto';
-import { User } from './entities/user.entitiy';
+import { User } from './entities/user.entity';
 import { InfLoginResponse } from './responses/login.response';
 import { UserService } from './user.service';
 

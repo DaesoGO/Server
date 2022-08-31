@@ -8,6 +8,7 @@ import { DatabaseModule } from './database/database.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MysqlConnectService } from './database/mysqlConnect.service';
 import { DiaryModule } from './diary/diary.module';
+import { ExerciseModule } from './exercise/exercise.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { DiaryModule } from './diary/diary.module';
     UserModule,
     DatabaseModule,
     DiaryModule,
+    ExerciseModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,5 +1,5 @@
 import { IsDate, IsEmpty, IsString } from 'class-validator';
-import { User } from 'src/user/entities/user.entitiy';
+import { User } from 'src/user/entities/user.entity';
 
 export class diaryDto {
   @IsString()

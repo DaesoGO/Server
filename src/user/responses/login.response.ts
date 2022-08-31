@@ -1,4 +1,4 @@
-import { User } from '../entities/user.entitiy';
+import { User } from '../entities/user.entity';
 
 export interface InfLoginResponse {
   user: User;

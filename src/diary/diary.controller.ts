@@ -5,15 +5,13 @@ import {
   Get,
   Param,
   Post,
-  Put,
-  Query,
   UseGuards,
 } from '@nestjs/common';
 import { Token } from 'src/common/decorators/token.decorator';
 import { AuthGuard } from 'src/common/guards/auth.guard';
 import DataResponse from 'src/common/response/DataResponse';
 import Response from 'src/common/response/response';
-import { User } from 'src/user/entities/user.entitiy';
+import { User } from 'src/user/entities/user.entity';
 import { DiaryService } from './diary.service';
 import { diaryDto } from './dto/diary.dto';
 import { Diary } from './entities/diary.entitiy';

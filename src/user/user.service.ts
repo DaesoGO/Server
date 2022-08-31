@@ -9,7 +9,7 @@ import * as bcrypt from 'bcrypt';
 import { TokenService } from 'src/token/token.service';
 import { loginDto } from './dto/login.dto';
 import { UserDto } from './dto/user.dto';
-import { User } from './entities/user.entitiy';
+import { User } from './entities/user.entity';
 import { UserRepository } from './repositories/user.repository';
 import { InfLoginResponse } from './responses/login.response';
 
