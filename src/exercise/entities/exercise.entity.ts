@@ -22,5 +22,5 @@ export class Exercise {
   exerciseArea: string;
 
   @OneToMany(() => Board, (board) => board.exercise)
-  Boards: Board[];
+  boards: Board[];
 }

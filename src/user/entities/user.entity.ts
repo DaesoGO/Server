@@ -1,5 +1,6 @@
 import { Diary } from 'src/diary/entities/diary.entitiy';
 import { Board } from 'src/exercise/entities/Board.entity';
+import { Comment } from 'src/exercise/entities/comment.entity';
 import { Column, Entity, OneToMany, PrimaryColumn } from 'typeorm';
 
 @Entity()
@@ -29,5 +30,8 @@ export class User {
   diary: Diary[];
 
   @OneToMany(() => Board, (board) => board.user)
-  Boards: Board[];
+  boards: Board[];
+
+  @OneToMany(() => Comment, (comment) => comment.user)
+  comments: Comment[];
 }

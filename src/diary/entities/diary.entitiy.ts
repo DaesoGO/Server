@@ -1,5 +1,11 @@
 import { User } from 'src/user/entities/user.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class Diary {
@@ -16,5 +22,6 @@ export class Diary {
   createdAt: Date;
 
   @ManyToOne(() => User, (user) => user.diary, { nullable: false })
+  @JoinColumn({ name: 'FK_user' })
   user: User;
 }

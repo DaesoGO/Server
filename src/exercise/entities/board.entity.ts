@@ -1,5 +1,12 @@
 import { User } from 'src/user/entities/user.entity';
-import { Column, Entity, ManyToOne, OneToMany, PrimaryColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  PrimaryColumn,
+} from 'typeorm';
 import { Comment } from './comment.entity';
 import { Exercise } from './exercise.entity';
 
@@ -12,14 +19,16 @@ export class Board {
   content: string;
 
   @Column()
-  craeteAt: Date;
+  craetedAt: Date;
 
   @OneToMany(() => Comment, (comment) => comment.board)
   comments: Comment[];
 
-  @ManyToOne(() => Exercise, (exercise) => exercise.Boards)
+  @ManyToOne(() => Exercise, (exercise) => exercise.boards)
+  @JoinColumn({ name: 'FK_exercise' })
   exercise: Exercise;
 
-  @ManyToOne(() => User, (user) => user.Boards)
+  @ManyToOne(() => User, (user) => user.boards)
+  @JoinColumn({ name: 'FK_user' })
   user: User;
 }
