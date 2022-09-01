@@ -11,6 +11,9 @@ export class Board {
   @Column({ length: 10000 })
   content: string;
 
+  @Column()
+  craeteAt: Date;
+
   @OneToMany(() => Comment, (comment) => comment.board)
   comments: Comment[];
 
