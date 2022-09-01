@@ -4,6 +4,7 @@ import {
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
+import { CommentDto } from 'src/exercise/dto/comment.dto';
 import {
   validataionTwoValueNullORUndefined,
   validationNullORUndefined,

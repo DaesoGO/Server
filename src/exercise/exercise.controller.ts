@@ -14,6 +14,7 @@ import DataResponse from 'src/common/response/DataResponse';
 import Response from 'src/common/response/response';
 import { User } from 'src/user/entities/user.entity';
 import { BoardDto } from './dto/board.dto';
+import { CommentDto } from './dto/comment.dto';
 import { Board } from './entities/Board.entity';
 import { Exercise } from './entities/exercise.entity';
 import { ExerciseService } from './exercise.service';
@@ -77,10 +78,25 @@ export class ExerciseController {
   }
 
   @UseGuards(AuthGuard)
-  @Delete('/:id/boardId/board')
+  @Delete('/:id/:boardId/board')
   async deleteBoard(@Token() user: User, @Param() param): Promise<Response> {
     await this.exerciseService.deleteBoard(user, param);
 
     return Response.success('운동 게시글 삭제 성공');
   }
+
+  @UseGuards(AuthGuard)
+  @Post('/:id/:boardId/comment')
+  async addComment(
+    @Token() user: User,
+    @Body() dto: CommentDto,
+    @Param() param,
+  ): Promise<Response> {
+    await this.exerciseService.addComment(user, dto, param);
+
+    return Response.success('댓글이 생성되었습니다.');
+  }
+
+  // @UseGuards(AuthGuard)
+  // @Delete('/:id/:boardId/comment')
 }

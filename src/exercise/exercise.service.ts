@@ -11,6 +11,7 @@ import {
 import { TokenService } from 'src/token/token.service';
 import { User } from 'src/user/entities/user.entity';
 import { BoardDto } from './dto/board.dto';
+import { CommentDto } from './dto/comment.dto';
 import { Board } from './entities/Board.entity';
 import { Exercise } from './entities/exercise.entity';
 import { BoardRepository } from './repositories/board.repository';
@@ -105,5 +106,23 @@ export class ExerciseService {
     }
 
     await this.boardRepository.remove(board);
+  }
+
+  public async addComment(user: User, dto: CommentDto, param): Promise<void> {
+    const board: undefined | Board = await this.boardRepository.findBoard(
+      param.id,
+      param.boardId,
+    );
+
+    if (validationNullORUndefined(board)) {
+      throw new NotFoundException('존재하지 않는 게시글입니다.');
+    }
+
+    const comment = this.commentRepository.create(dto);
+    comment.createdAt = new Date();
+    comment.board = board;
+    comment.user = user;
+
+    await this.commentRepository.save(comment);
   }
 }
