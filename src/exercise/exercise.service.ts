@@ -125,4 +125,7 @@ export class ExerciseService {
 
     await this.commentRepository.save(comment);
   }
+
+  //   public async deleteComment(user, param) : Promise<void> {
+  //   }
 }

@@ -99,4 +99,9 @@ export class ExerciseController {
 
   // @UseGuards(AuthGuard)
   // @Delete('/:id/:boardId/comment')
+  // async deleteComment(@Token() user: User, @Param() param): Promise<Response> {
+  //   await this.exerciseService.deleteComment(user, param);
+
+  //   return Response.success('게시글 댓글 삭제 성공');
+  // }
 }
