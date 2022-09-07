@@ -97,11 +97,14 @@ export class ExerciseController {
     return Response.success('댓글이 생성되었습니다.');
   }
 
-  // @UseGuards(AuthGuard)
-  // @Delete('/:id/:boardId/comment')
-  // async deleteComment(@Token() user: User, @Param() param): Promise<Response> {
-  //   await this.exerciseService.deleteComment(user, param);
+  @UseGuards(AuthGuard)
+  @Delete('/comment')
+  async deleteComment(
+    @Token() user: User,
+    @Body() id: number,
+  ): Promise<Response> {
+    await this.exerciseService.deleteComment(user, id);
 
-  //   return Response.success('게시글 댓글 삭제 성공');
-  // }
+    return Response.success('게시글 댓글 삭제 성공');
+  }
 }

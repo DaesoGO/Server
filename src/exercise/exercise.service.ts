@@ -126,6 +126,17 @@ export class ExerciseService {
     await this.commentRepository.save(comment);
   }
 
-  //   public async deleteComment(user, param) : Promise<void> {
-  //   }
+  public async deleteComment(user: User, id: number): Promise<void> {
+    const comment = await this.commentRepository.findOne({
+      where: { id, user },
+    });
+
+    if (validationNullORUndefined(comment)) {
+      throw new UnauthorizedException(
+        '존재하지 않는 댓글이거나 다른 소유의 댓글입니다.',
+      );
+    }
+
+    await this.commentRepository.remove(comment);
+  }
 }
