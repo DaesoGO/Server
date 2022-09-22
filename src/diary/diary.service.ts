@@ -46,9 +46,10 @@ export class DiaryService {
     if (!(await this.userRepository.userDiaryPuYn(param))) {
       throw new NotFoundException('존재하지 않는 유저입니다.');
     }
-
+    console.log('test');
     const diaryPuYn = await this.userRepository.userDiaryPuYn(param);
 
+    console.log('test2');
     if (
       validataionTwoValueNullORUndefined(user.id, param) &&
       !diaryPuYn.diary_pu_yn

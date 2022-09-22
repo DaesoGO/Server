@@ -24,7 +24,7 @@ export class UserService {
     const user: undefined | User = await this.userRepository.findOne(dto.id);
 
     if (!validationNullORUndefined(user)) {
-      throw new ForbiddenException('충복된 계정입니다');
+      throw new ForbiddenException('중복된 계정입니다');
     }
 
     const passwordHash = await bcrypt.hash(dto.password, 5);

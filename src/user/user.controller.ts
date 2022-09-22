@@ -8,6 +8,7 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { ApiTags } from '@nestjs/swagger';
 import { Token } from 'src/common/decorators/token.decorator';
 import { AuthGuard } from 'src/common/guards/auth.guard';
 import DataResponse from 'src/common/response/DataResponse';
@@ -18,7 +19,8 @@ import { User } from './entities/user.entity';
 import { InfLoginResponse } from './responses/login.response';
 import { UserService } from './user.service';
 
-@Controller('user')
+@ApiTags('User')
+@Controller('api/user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 

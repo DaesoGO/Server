@@ -7,6 +7,7 @@ import {
   Post,
   UseGuards,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { Token } from 'src/common/decorators/token.decorator';
 import { AuthGuard } from 'src/common/guards/auth.guard';
 import DataResponse from 'src/common/response/DataResponse';
@@ -16,7 +17,8 @@ import { DiaryService } from './diary.service';
 import { diaryDto } from './dto/diary.dto';
 import { Diary } from './entities/diary.entitiy';
 
-@Controller('/diary')
+@ApiTags('Diary')
+@Controller('api/diary')
 export class DiaryController {
   constructor(private readonly diaryService: DiaryService) {}
 

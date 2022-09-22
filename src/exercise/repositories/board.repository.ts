@@ -9,4 +9,14 @@ export class BoardRepository extends Repository<Board> {
       .where('board.id = :id', { id: exercise + '_' + number })
       .getOne();
   }
+
+  public async findBoardNoJoin(
+    exercise: string,
+    number: string,
+  ): Promise<Board> {
+    return this.createQueryBuilder('board')
+      .leftJoinAndSelect('board.user', 'user')
+      .where('board.id = :id', { id: exercise + '_' + number })
+      .getOne();
+  }
 }

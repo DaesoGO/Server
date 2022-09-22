@@ -100,6 +100,7 @@ export class ExerciseService {
       param.id,
       param.boardId,
     );
+    console.log(board);
 
     if (validataionTwoValueNullORUndefined(board.user.id, user.id)) {
       throw new UnauthorizedException('게시글이 다른 소유자 입니다.');
@@ -109,7 +110,7 @@ export class ExerciseService {
   }
 
   public async addComment(user: User, dto: CommentDto, param): Promise<void> {
-    const board: undefined | Board = await this.boardRepository.findBoard(
+    const board: undefined | Board = await this.boardRepository.findBoardNoJoin(
       param.id,
       param.boardId,
     );

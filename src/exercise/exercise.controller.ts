@@ -8,6 +8,7 @@ import {
   Put,
   UseGuards,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { Token } from 'src/common/decorators/token.decorator';
 import { AuthGuard } from 'src/common/guards/auth.guard';
 import DataResponse from 'src/common/response/DataResponse';
@@ -19,11 +20,12 @@ import { Board } from './entities/Board.entity';
 import { Exercise } from './entities/exercise.entity';
 import { ExerciseService } from './exercise.service';
 
-@Controller('')
+@ApiTags('Exercise')
+@Controller('/api/ex')
 export class ExerciseController {
   constructor(private readonly exerciseService: ExerciseService) {}
 
-  @UseGuards(AuthGuard)
+  // @UseGuards(AuthGuard)
   @Get('/:id')
   async findExercise(@Param() param): Promise<DataResponse<Exercise>> {
     const list: undefined | Exercise = await this.exerciseService.findExercise(
@@ -34,7 +36,7 @@ export class ExerciseController {
   }
 
   @UseGuards(AuthGuard)
-  @Post('/:id')
+  @Post(':id/board')
   async addExBoard(
     @Token() user: User,
     @Body() dto: BoardDto,
@@ -45,7 +47,7 @@ export class ExerciseController {
     return Response.success('게시글이 생성되었습니다.');
   }
 
-  @UseGuards(AuthGuard)
+  // @UseGuards(AuthGuard)
   @Get('/:id/board')
   async findBoard(@Param() param): Promise<DataResponse<Board[]>> {
     const list: undefined | Board[] = await this.exerciseService.findBoard(
@@ -56,7 +58,7 @@ export class ExerciseController {
   }
 
   @UseGuards(AuthGuard)
-  @Get('/:id/:boardId/board')
+  @Get('/:id/board/:boardId')
   async findBoardOne(@Param() param): Promise<DataResponse<Board>> {
     const list: undefined | Board = await this.exerciseService.findBoardOne(
       param,
@@ -78,7 +80,7 @@ export class ExerciseController {
   }
 
   @UseGuards(AuthGuard)
-  @Delete('/:id/:boardId/board')
+  @Delete('/:id/board/:boardId')
   async deleteBoard(@Token() user: User, @Param() param): Promise<Response> {
     await this.exerciseService.deleteBoard(user, param);
 
@@ -86,7 +88,7 @@ export class ExerciseController {
   }
 
   @UseGuards(AuthGuard)
-  @Post('/:id/:boardId/comment')
+  @Post('/:id/comment/:boardId')
   async addComment(
     @Token() user: User,
     @Body() dto: CommentDto,

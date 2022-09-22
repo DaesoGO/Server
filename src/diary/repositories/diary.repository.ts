@@ -6,7 +6,7 @@ export class DiaryRepository extends Repository<Diary> {
   public findListInfo(userId: string): Promise<Diary[] | undefined> {
     return this.createQueryBuilder('diary')
       .select(['diary.photo', 'diary.id', 'diary.createdAt'])
-      .where('diary.userId = :userId', { userId })
+      .where('diary.FK_user = :userId', { userId })
       .getMany();
   }
 
