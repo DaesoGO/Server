@@ -13,16 +13,20 @@ import { User } from './entities/user.entity';
 import { UserRepository } from './repositories/user.repository';
 import { InfLoginResponse } from './responses/login.response';
 import Response from 'src/common/response/response';
+import { RecommendRepository } from 'src/recommend/repositories/recommend.repository';
+import { Recommend } from 'src/recommend/entities/recommend.entity';
 
 @Injectable()
 export class UserService {
   constructor(
     private readonly tokenService: TokenService,
     private readonly userRepository: UserRepository,
+    private readonly recommendRepository: RecommendRepository,
   ) {}
 
   public async register(dto: UserDto): Promise<void> {
     const user: undefined | User = await this.userRepository.findOne(dto.id);
+    const recommend: Recommend = await this.recommendRepository.create();
 
     if (!validationNullORUndefined(user)) {
       throw new ForbiddenException('중복된 계정입니다');
@@ -31,7 +35,9 @@ export class UserService {
     const passwordHash = await bcrypt.hash(dto.password, 5);
     dto.password = passwordHash;
 
-    await this.userRepository.save(dto);
+    const saveUser = await this.userRepository.save(dto);
+    recommend.user = saveUser;
+    await this.recommendRepository.save(recommend);
   }
 
   public async checkId(id: string): Promise<User> {

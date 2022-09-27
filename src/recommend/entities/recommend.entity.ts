@@ -13,10 +13,10 @@ export class Recommend {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ nullable: true })
   exercisesName: string;
 
-  @Column()
+  @Column({ nullable: true })
   fruitsName: string;
 
   @OneToOne(() => User)

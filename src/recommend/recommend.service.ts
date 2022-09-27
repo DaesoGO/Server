@@ -19,16 +19,28 @@ export class RecommendService {
     const findUser: undefined | User = await this.userRepositroy.findOne({
       id: user.id,
     });
-    const findRecommend: undefined | Recommend =
-      await this.recommendRepository.findOne({ user: findUser });
 
     if (validationNullORUndefined(findUser)) {
       throw new NotFoundException('존재하지 않는 유저입니다.');
     }
 
-    if (validationNullORUndefined(findRecommend)) {
-    }
+    const findRecommend: undefined | Recommend =
+      await this.recommendRepository.findOne({ user: findUser });
 
-    console.log(ai, findUser);
+    console.log(this.randomize(10, 3));
   }
+
+  public randomize = (size, cnt) => {
+    if (cnt > size) {
+      return undefined;
+    }
+    const ret = [];
+    while (ret.length < cnt) {
+      const temp = Math.floor(Math.random() * size + 1);
+      if (ret.indexOf(temp) === -1) {
+        ret.push(temp);
+      }
+    }
+    return ret;
+  };
 }
