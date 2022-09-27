@@ -13,6 +13,9 @@ export class Recommend {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column()
+  hour: number;
+
   @Column({ nullable: true })
   exercisesName: string;
 

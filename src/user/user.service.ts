@@ -37,6 +37,7 @@ export class UserService {
 
     const saveUser = await this.userRepository.save(dto);
     recommend.user = saveUser;
+    recommend.hour = new Date().getHours();
     await this.recommendRepository.save(recommend);
   }
 
