@@ -10,7 +10,6 @@ import { DiaryRepository } from './repositories/diary.repository';
 @Module({
   imports: [
     TypeOrmModule.forFeature([DiaryRepository, UserRepository]),
-
     TokenModule,
     UserModule,
   ],

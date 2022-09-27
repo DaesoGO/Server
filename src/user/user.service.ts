@@ -12,6 +12,7 @@ import { UserDto } from './dto/user.dto';
 import { User } from './entities/user.entity';
 import { UserRepository } from './repositories/user.repository';
 import { InfLoginResponse } from './responses/login.response';
+import Response from 'src/common/response/response';
 
 @Injectable()
 export class UserService {
@@ -31,6 +32,12 @@ export class UserService {
     dto.password = passwordHash;
 
     await this.userRepository.save(dto);
+  }
+
+  public async checkId(id: string): Promise<User> {
+    const user: undefined | User = await this.userRepository.findOne({ id });
+
+    return user;
   }
 
   public async login(dto: loginDto): Promise<InfLoginResponse> {

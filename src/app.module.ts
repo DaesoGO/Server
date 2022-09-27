@@ -9,6 +9,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { MysqlConnectService } from './database/mysqlConnect.service';
 import { DiaryModule } from './diary/diary.module';
 import { ExerciseModule } from './exercise/exercise.module';
+import { RecommendModule } from './recommend/recommend.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { ExerciseModule } from './exercise/exercise.module';
     DatabaseModule,
     DiaryModule,
     ExerciseModule,
+    RecommendModule,
   ],
   controllers: [AppController],
   providers: [AppService],

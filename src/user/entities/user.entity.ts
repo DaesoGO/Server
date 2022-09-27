@@ -1,7 +1,8 @@
 import { Diary } from 'src/diary/entities/diary.entitiy';
 import { Board } from 'src/exercise/entities/Board.entity';
 import { Comment } from 'src/exercise/entities/comment.entity';
-import { Column, Entity, OneToMany, PrimaryColumn } from 'typeorm';
+import { Recommend } from 'src/recommend/entities/recommend.entity';
+import { Column, Entity, ManyToOne, OneToMany, PrimaryColumn } from 'typeorm';
 
 @Entity()
 export class User {

@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  Param,
   Post,
   UploadedFile,
   UseGuards,
@@ -29,6 +30,17 @@ export class UserController {
     await this.userService.register(dto);
 
     return Response.success('회원가입 성공');
+  }
+
+  @Get('register/check/:id')
+  async checkId(@Param() param): Promise<Response> {
+    const check = await this.userService.checkId(param.id);
+
+    if (check) {
+      return Response.success('중복된 아이디 입니다.');
+    } else {
+      return Response.success('사용가능한 아이디 입니다.');
+    }
   }
 
   @Post('login')
