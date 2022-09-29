@@ -28,9 +28,13 @@ export class RecommendService {
       await this.recommendRepository.findOne({ user: findUser });
 
     if (validationNullORUndefined(findRecommend.exercisesName)) {
-      console.log('test');
+      const fruitRandom = await this.fruitRepository.fruitRandomThree();
+
+      //console.log(fruitRandom.map((x) => x.name).join('/'));
+
+      await this.recommendRepository.update(findRecommend, {
+        fruitsName: fruitRandom.map((name) => name.name).join('/'),
+      });
     }
-    console.log(randomize(10, 3));
-    console.log(await this.fruitRepository.findOne({ id: 1 || 2 || 3 }));
   }
 }

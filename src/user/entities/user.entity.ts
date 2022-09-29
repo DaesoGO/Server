@@ -6,25 +6,25 @@ import { Column, Entity, ManyToOne, OneToMany, PrimaryColumn } from 'typeorm';
 
 @Entity()
 export class User {
-  @PrimaryColumn({ length: 50 })
+  @PrimaryColumn({ length: 50, name: 'us_id' })
   id: string;
 
-  @Column({ length: 50 })
+  @Column({ length: 50, name: 'us_nickname' })
   nickname: string;
 
-  @Column({ length: 200 })
+  @Column({ length: 200, name: 'us_password' })
   password: string;
 
-  @Column({ length: 2 })
+  @Column({ length: 2, name: 'us_sex' })
   sex: string;
 
-  @Column({ length: 10 })
+  @Column({ length: 10, name: 'us_age' })
   age: string;
 
-  @Column({ length: 200 })
+  @Column({ length: 200, name: 'us_interest' })
   interest: string;
 
-  @Column()
+  @Column({ name: 'us_diary_pu_yn' })
   diary_pu_yn: boolean;
 
   @OneToMany(() => Diary, (diary) => diary.user)

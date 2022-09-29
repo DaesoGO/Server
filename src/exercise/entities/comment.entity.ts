@@ -11,13 +11,13 @@ import { Board } from './Board.entity';
 
 @Entity()
 export class Comment {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ name: 'co_id' })
   id: string;
 
-  @Column()
+  @Column({ name: 'co_content' })
   content: string;
 
-  @Column()
+  @Column({ name: 'createAt' })
   createdAt: Date;
 
   @ManyToOne(() => Board, (board) => board.comments)

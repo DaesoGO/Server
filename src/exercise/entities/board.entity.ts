@@ -12,13 +12,13 @@ import { Exercise } from './exercise.entity';
 
 @Entity()
 export class Board {
-  @PrimaryColumn()
+  @PrimaryColumn({ name: 'bo_id' })
   id: string;
 
-  @Column({ length: 10000 })
+  @Column({ length: 10000, name: 'bo_content' })
   content: string;
 
-  @Column()
+  @Column({ name: 'createAt' })
   craetedAt: Date;
 
   @OneToMany(() => Comment, (comment) => comment.board)

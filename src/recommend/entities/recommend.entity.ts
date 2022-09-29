@@ -10,16 +10,16 @@ import {
 
 @Entity()
 export class Recommend {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ name: 're_id' })
   id: number;
 
-  @Column()
+  @Column({ name: 're_hour' })
   hour: number;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, name: 're_exercisesName' })
   exercisesName: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, name: 're_fruitsName' })
   fruitsName: string;
 
   @OneToOne(() => User)
