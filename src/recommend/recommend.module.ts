@@ -7,6 +7,7 @@ import { UserModule } from 'src/user/user.module';
 import { FruitRepository } from './repositories/fruit.repository';
 import { RecommendRepository } from './repositories/recommend.repository';
 import { UserRepository } from 'src/user/repositories/user.repository';
+import { ExeriseRepository } from 'src/exercise/repositories/exercise.repository';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { UserRepository } from 'src/user/repositories/user.repository';
       FruitRepository,
       RecommendRepository,
       UserRepository,
+      ExeriseRepository,
     ]),
     UserModule,
     TokenModule,

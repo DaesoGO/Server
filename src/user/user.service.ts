@@ -15,6 +15,7 @@ import { InfLoginResponse } from './responses/login.response';
 import Response from 'src/common/response/response';
 import { RecommendRepository } from 'src/recommend/repositories/recommend.repository';
 import { Recommend } from 'src/recommend/entities/recommend.entity';
+import { checkHour } from 'src/share/utils/function.utils';
 
 @Injectable()
 export class UserService {
@@ -37,7 +38,7 @@ export class UserService {
 
     const saveUser = await this.userRepository.save(dto);
     recommend.user = saveUser;
-    recommend.hour = new Date().getHours();
+    recommend.hour = checkHour();
     await this.recommendRepository.save(recommend);
   }
 

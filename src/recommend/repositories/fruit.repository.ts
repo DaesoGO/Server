@@ -17,4 +17,18 @@ export class FruitRepository extends Repository<Fruit> {
       .orWhere('fruit.id = :fruitRandomTh', { fruitRandomTh })
       .getMany();
   }
+
+  public fruitfindThree(recommendInfo) {
+    const fruit = recommendInfo.fruitsName.split('/');
+    const fruitRandomFi = fruit[0],
+      fruitRandomSe = fruit[1],
+      fruitRandomTh = fruit[2];
+
+    return this.createQueryBuilder('fruit')
+      .select(['fruit.name', 'fruit.content', 'fruit.img'])
+      .where('fruit.name = :fruitRandomFi', { fruitRandomFi })
+      .orWhere('fruit.name = :fruitRandomSe', { fruitRandomSe })
+      .orWhere('fruit.name = :fruitRandomTh', { fruitRandomTh })
+      .getMany();
+  }
 }

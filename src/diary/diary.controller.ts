@@ -17,7 +17,6 @@ import { DiaryService } from './diary.service';
 import { diaryDto } from './dto/diary.dto';
 import { Diary } from './entities/diary.entitiy';
 
-@ApiTags('Diary')
 @Controller('api/diary')
 export class DiaryController {
   constructor(private readonly diaryService: DiaryService) {}

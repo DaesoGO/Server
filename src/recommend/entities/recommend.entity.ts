@@ -14,7 +14,7 @@ export class Recommend {
   id: number;
 
   @Column({ name: 're_hour' })
-  hour: number;
+  hour: string;
 
   @Column({ nullable: true, name: 're_exercisesName' })
   exercisesName: string;
@@ -23,6 +23,6 @@ export class Recommend {
   fruitsName: string;
 
   @OneToOne(() => User)
-  @JoinColumn()
+  @JoinColumn({ name: 'FK_user' })
   user: User;
 }

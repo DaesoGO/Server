@@ -20,7 +20,6 @@ import { User } from './entities/user.entity';
 import { InfLoginResponse } from './responses/login.response';
 import { UserService } from './user.service';
 
-@ApiTags('User')
 @Controller('api/user')
 export class UserController {
   constructor(private readonly userService: UserService) {}

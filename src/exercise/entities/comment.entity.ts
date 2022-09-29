@@ -17,7 +17,7 @@ export class Comment {
   @Column({ name: 'co_content' })
   content: string;
 
-  @Column({ name: 'createAt' })
+  @Column({ name: 'co_createAt' })
   createdAt: Date;
 
   @ManyToOne(() => Board, (board) => board.comments)

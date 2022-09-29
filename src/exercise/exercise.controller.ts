@@ -20,7 +20,6 @@ import { Board } from './entities/Board.entity';
 import { Exercise } from './entities/exercise.entity';
 import { ExerciseService } from './exercise.service';
 
-@ApiTags('Exercise')
 @Controller('/api/ex')
 export class ExerciseController {
   constructor(private readonly exerciseService: ExerciseService) {}
