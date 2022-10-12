@@ -31,6 +31,10 @@ export class ExerciseService {
     const exercise: undefined | Exercise =
       await this.exerciseRepository.findOne(param.id);
 
+    if (validationNullORUndefined(exercise)) {
+      throw new NotFoundException('존재하지 않는 운동입니다.');
+    }
+
     return exercise;
   }
 
@@ -55,11 +59,21 @@ export class ExerciseService {
     await this.boardRepository.save(board);
   }
 
-  public async findBoard(param): Promise<Board[]> {
-    const board: undefined | Board[] = await this.boardRepository.find({
+  public async findBoard(param): Promise<any> {
+    const board: undefined | any = await this.boardRepository.find({
       where: { exercise: param },
+      select: ['id', 'title'],
       relations: ['user'],
     });
+    // board[0].comment = await (
+    //   await this.commentRepository.find({ where: { board: board[1].id } })
+    // ).length;
+
+    for (let i = 0; i < board.length; i++) {
+      board[i].comment = await (
+        await this.commentRepository.find({ where: { board: board[i].id } })
+      ).length;
+    }
 
     return board;
   }

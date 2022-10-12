@@ -19,4 +19,11 @@ export class BoardRepository extends Repository<Board> {
       .where('board.id = :id', { id: exercise + '_' + number })
       .getOne();
   }
+
+  // public async findWandedOption(exercise: string): Promise<any> {
+  //   return this.createQueryBuilder('board')
+  //     .Select('baord.exercise = :exercise', { exercise })
+  //     .select('bo_id', 'bo_title')
+  //     .getMany();
+  // }
 }

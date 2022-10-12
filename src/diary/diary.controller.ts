@@ -26,8 +26,10 @@ export class DiaryController {
   async diaryUpload(
     @Token() user: User,
     @Body() dto: diaryDto,
+    @Param() param,
   ): Promise<Response> {
-    await this.diaryService.diaryUpload(user, dto);
+    await this.diaryService.diaryUpload(user, dto, param.id);
+    console.log('test');
 
     return Response.success('글 등록 성공');
   }

@@ -24,12 +24,12 @@ export class DiaryService {
     private readonly userRepository: UserRepository,
   ) {}
 
-  public async diaryUpload(user: User, dto: diaryDto): Promise<void> {
+  public async diaryUpload(user: User, dto: diaryDto, param): Promise<void> {
     const userfind: undefined | User = await this.userRepository.findOne({
       id: user.id,
     });
 
-    if (validationNullORUndefined(user)) {
+    if (validationNullORUndefined(userfind)) {
       throw new UnauthorizedException('유저를 찾을 수 없음.');
     }
 

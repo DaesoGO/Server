@@ -8,11 +8,16 @@ export class diaryDto {
 
   @IsString()
   @IsEmpty()
+  exercise!: string;
+
+  @IsString()
+  @IsEmpty()
+  part!: string;
+
+  @IsString()
+  @IsEmpty()
   photo!: string;
 
   @IsDate()
   createdAt: Date;
-
-  @IsString()
-  userId: User;
 }

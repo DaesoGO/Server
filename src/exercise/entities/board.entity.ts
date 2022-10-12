@@ -15,6 +15,9 @@ export class Board {
   @PrimaryColumn({ name: 'bo_id' })
   id: string;
 
+  @Column({ name: 'bo_title' })
+  title: string;
+
   @Column({ length: 10000, name: 'bo_content' })
   content: string;
 
