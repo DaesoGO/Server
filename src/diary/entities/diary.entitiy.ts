@@ -25,7 +25,7 @@ export class Diary {
   photo: string;
 
   @Column({ name: 'di_createAt' })
-  createdAt: Date;
+  createdAt: string;
 
   @ManyToOne(() => User, (user) => user.diary, { nullable: false })
   @JoinColumn({ name: 'FK_user' })

@@ -123,6 +123,12 @@ export class ExerciseService {
     await this.boardRepository.remove(board);
   }
 
+  public async findComment(param): Promise<any> {
+    return await this.commentRepository.find({
+      where: { board: param.id + '_' + param.boardId },
+    });
+  }
+
   public async addComment(user: User, dto: CommentDto, param): Promise<void> {
     const board: undefined | Board = await this.boardRepository.findBoardNoJoin(
       param.id,

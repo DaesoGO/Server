@@ -5,6 +5,8 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { CommentDto } from 'src/exercise/dto/comment.dto';
+import { Exercise } from 'src/exercise/entities/exercise.entity';
+import { ExeriseRepository } from 'src/exercise/repositories/exercise.repository';
 import {
   validataionTwoValueNullORUndefined,
   validationNullORUndefined,
@@ -21,10 +23,12 @@ export class DiaryService {
   constructor(
     private readonly tokenService: TokenService,
     private readonly diaryRepository: DiaryRepository,
+    private readonly exerciseRepository: ExeriseRepository,
     private readonly userRepository: UserRepository,
   ) {}
 
   public async diaryUpload(user: User, dto: diaryDto, param): Promise<void> {
+    const date = new Date();
     const userfind: undefined | User = await this.userRepository.findOne({
       id: user.id,
     });
@@ -33,8 +37,11 @@ export class DiaryService {
       throw new UnauthorizedException('유저를 찾을 수 없음.');
     }
 
-    const today = new Date();
-    dto.createdAt = today;
+    dto.createdAt =
+      '' +
+      date.getFullYear() +
+      String(date.getMonth()).padStart(2, '0') +
+      String(date.getDay()).padStart(2, '0');
 
     const data = this.diaryRepository.create(dto);
     data.user = user;
@@ -46,10 +53,8 @@ export class DiaryService {
     if (!(await this.userRepository.userDiaryPuYn(param))) {
       throw new NotFoundException('존재하지 않는 유저입니다.');
     }
-    console.log('test');
     const diaryPuYn = await this.userRepository.userDiaryPuYn(param);
 
-    console.log('test2');
     if (
       validataionTwoValueNullORUndefined(user.id, param) &&
       !diaryPuYn.diary_pu_yn
@@ -62,7 +67,7 @@ export class DiaryService {
 
   public async diaryListOne(user: User, param): Promise<Diary> {
     const diaryPuYn = await this.userRepository.userDiaryPuYn(param.userid);
-    const listOne = await this.diaryRepository.findListOneInfo(param.id);
+    const listOne = await this.diaryRepository.findListOneInfo(param.time);
 
     if (validationNullORUndefined(diaryPuYn)) {
       throw new NotFoundException('존재하지 않는 유저입니다');
@@ -75,15 +80,19 @@ export class DiaryService {
       throw new MethodNotAllowedException('당사자가 게시글을 비공개 했습니다.');
     }
 
-    if (listOne.user.id !== param.userid) {
-      throw new NotFoundException('게시글이 다른 소유자입니다.');
-    }
+    // if (listOne.user.id !== param.userid) {
+    //   throw new NotFoundException('게시글이 다른 소유자입니다.');
+    // }
 
     if (validationNullORUndefined(listOne)) {
       throw new NotFoundException('없는 게시글 입니다.');
     }
 
     return listOne;
+  }
+
+  public async exerciseFindAll(): Promise<Exercise[]> {
+    return await this.exerciseRepository.find();
   }
 
   // public async diaryUpdate(user: User, dto: diaryDto, param): Promise<void> {

@@ -12,7 +12,7 @@ export class RecommendController {
   constructor(private readonly recommendService: RecommendService) {}
 
   @UseGuards(AuthGuard)
-  @Get('fruit')
+  @Get('/fruit')
   async recommendFr(@Token() user: User): Promise<any> {
     const list = await this.recommendService.recommendFr(user);
 
@@ -20,7 +20,7 @@ export class RecommendController {
   }
 
   @UseGuards(AuthGuard)
-  @Get('exercise')
+  @Get('/exercise')
   async recommendEx(): Promise<DataResponse<Exercise[]>> {
     const list = await this.recommendService.recommendEx();
 

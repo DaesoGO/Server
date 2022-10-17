@@ -5,15 +5,15 @@ import { Diary } from '../entities/diary.entitiy';
 export class DiaryRepository extends Repository<Diary> {
   public findListInfo(userId: string): Promise<Diary[] | undefined> {
     return this.createQueryBuilder('diary')
-      .select(['diary.photo', 'diary.id', 'diary.createdAt'])
+      .select(['diary.id', 'diary.photo', 'diary.createdAt'])
       .where('diary.FK_user = :userId', { userId })
       .getMany();
   }
 
-  public async findListOneInfo(id: number): Promise<Diary | undefined> {
+  public async findListOneInfo(createdAt: number): Promise<Diary | undefined> {
     return this.createQueryBuilder('diary')
       .leftJoinAndSelect('diary.user', 'user')
-      .where('diary.id = :id', { id })
+      .where('diary.createdAt = :createdAt', { createdAt })
       .getOne();
   }
 

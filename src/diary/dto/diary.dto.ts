@@ -19,5 +19,5 @@ export class diaryDto {
   photo!: string;
 
   @IsDate()
-  createdAt: Date;
+  createdAt: string;
 }

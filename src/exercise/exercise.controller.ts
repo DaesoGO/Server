@@ -56,7 +56,7 @@ export class ExerciseController {
     return DataResponse.dataSuccesss('운동 게시글 불어오기 성공', list);
   }
 
-  // ㅍ @UseGuards(AuthGuard)
+  // @UseGuards(AuthGuard)
   @Get('/:id/board/:boardId')
   async findBoardOne(@Param() param): Promise<DataResponse<Board>> {
     const list: undefined | Board = await this.exerciseService.findBoardOne(
@@ -67,7 +67,7 @@ export class ExerciseController {
   }
 
   @UseGuards(AuthGuard)
-  @Put('/:id/:boardId/board')
+  @Put('/:id/board/:boardId')
   async putBoard(
     @Token() user: User,
     @Body() dto: BoardDto,
@@ -84,6 +84,14 @@ export class ExerciseController {
     await this.exerciseService.deleteBoard(user, param);
 
     return Response.success('운동 게시글 삭제 성공');
+  }
+
+  //@UseGuards(AuthGuard)
+  @Get('/:id/comment/:boardId')
+  async commentFind(@Param() param) {
+    const comment = await this.exerciseService.findComment(param);
+
+    return DataResponse.dataSuccesss('댓글 불러오기 성공', comment);
   }
 
   @UseGuards(AuthGuard)

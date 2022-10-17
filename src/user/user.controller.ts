@@ -46,7 +46,14 @@ export class UserController {
   async login(@Body() dto: loginDto): Promise<DataResponse<InfLoginResponse>> {
     const loginRes: InfLoginResponse = await this.userService.login(dto);
 
+    console.log('test');
     return DataResponse.dataSuccesss('로그인 성공', loginRes);
+  }
+
+  @UseGuards(AuthGuard)
+  @Get('/Decode')
+  async decode(@Token() user: User): Promise<User> {
+    return user;
   }
 
   @UseGuards(AuthGuard)

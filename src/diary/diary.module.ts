@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ExeriseRepository } from 'src/exercise/repositories/exercise.repository';
 import { TokenModule } from 'src/token/token.module';
 import { UserRepository } from 'src/user/repositories/user.repository';
 import { UserModule } from 'src/user/user.module';
@@ -9,7 +10,11 @@ import { DiaryRepository } from './repositories/diary.repository';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([DiaryRepository, UserRepository]),
+    TypeOrmModule.forFeature([
+      DiaryRepository,
+      UserRepository,
+      ExeriseRepository,
+    ]),
     TokenModule,
     UserModule,
   ],
