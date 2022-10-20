@@ -8,11 +8,12 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Board } from './Board.entity';
+import { Exercise } from './exercise.entity';
 
 @Entity()
 export class Comment {
   @PrimaryGeneratedColumn({ name: 'co_id' })
-  id: string;
+  id: number;
 
   @Column({ name: 'co_content' })
   content: string;
@@ -27,4 +28,8 @@ export class Comment {
   @ManyToOne(() => User, (user) => user.comments)
   @JoinColumn({ name: 'FK_user' })
   user: User;
+
+  @ManyToOne(() => Exercise, (exercise) => exercise.comments)
+  @JoinColumn({ name: 'FK_exercise' })
+  exercise: Exercise;
 }

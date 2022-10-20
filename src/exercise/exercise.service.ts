@@ -51,7 +51,6 @@ export class ExerciseService {
     const board = this.boardRepository.create(dto);
 
     console.log(boardNumer.length);
-    board.id = param + '_' + String(1 + boardNumer.length);
     board.craetedAt = new Date();
     board.exercise = exercise;
     board.user = user;
@@ -125,7 +124,7 @@ export class ExerciseService {
 
   public async findComment(param): Promise<any> {
     return await this.commentRepository.find({
-      where: { board: param.id + '_' + param.boardId },
+      where: { board: param.boardId, exercise: param.id },
     });
   }
 
@@ -134,7 +133,10 @@ export class ExerciseService {
       param.id,
       param.boardId,
     );
+    const exercise: undefined | Exercise =
+      await this.exerciseRepository.findOne(param.id);
 
+    console.log(board);
     if (validationNullORUndefined(board)) {
       throw new NotFoundException('존재하지 않는 게시글입니다.');
     }
@@ -142,6 +144,7 @@ export class ExerciseService {
     const comment = this.commentRepository.create(dto);
     comment.createdAt = new Date();
     comment.board = board;
+    comment.exercise = exercise;
     comment.user = user;
 
     await this.commentRepository.save(comment);

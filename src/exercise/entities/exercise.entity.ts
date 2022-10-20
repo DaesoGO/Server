@@ -1,5 +1,6 @@
 import { Column, Entity, ManyToOne, OneToMany, PrimaryColumn } from 'typeorm';
 import { Board } from './Board.entity';
+import { Comment } from './comment.entity';
 
 @Entity()
 export class Exercise {
@@ -23,4 +24,7 @@ export class Exercise {
 
   @OneToMany(() => Board, (board) => board.exercise)
   boards: Board[];
+
+  @OneToMany(() => Comment, (comment) => comment.exercise)
+  comments: Comment[];
 }

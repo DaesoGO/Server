@@ -6,14 +6,15 @@ import {
   ManyToOne,
   OneToMany,
   PrimaryColumn,
+  PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Comment } from './comment.entity';
 import { Exercise } from './exercise.entity';
 
 @Entity()
 export class Board {
-  @PrimaryColumn({ name: 'bo_id' })
-  id: string;
+  @PrimaryGeneratedColumn({ name: 'bo_id' })
+  id: number;
 
   @Column({ name: 'bo_title' })
   title: string;

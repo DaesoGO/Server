@@ -46,7 +46,8 @@ export class DiaryService {
     const data = this.diaryRepository.create(dto);
     data.user = user;
 
-    await this.diaryRepository.save(data);
+    console.log(date.getMonth());
+    //await this.diaryRepository.save(data);
   }
 
   public async diaryList(user: User, param: string): Promise<Diary[]> {

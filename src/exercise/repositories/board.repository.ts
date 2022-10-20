@@ -10,13 +10,11 @@ export class BoardRepository extends Repository<Board> {
       .getOne();
   }
 
-  public async findBoardNoJoin(
-    exercise: string,
-    number: string,
-  ): Promise<Board> {
+  public async findBoardNoJoin(exercise: string, id: string): Promise<Board> {
     return this.createQueryBuilder('board')
       .leftJoinAndSelect('board.user', 'user')
-      .where('board.id = :id', { id: exercise + '_' + number })
+      .where('board.exercise = :exercise', { exercise })
+      .where('board.id = :id', { id })
       .getOne();
   }
 
