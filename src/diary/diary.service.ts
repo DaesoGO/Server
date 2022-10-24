@@ -27,8 +27,14 @@ export class DiaryService {
     private readonly userRepository: UserRepository,
   ) {}
 
-  public async diaryUpload(user: User, dto: diaryDto, param): Promise<void> {
+  public async diaryUpload(
+    user: User,
+    dto: diaryDto,
+    param,
+    file: Express.Multer.File,
+  ): Promise<void> {
     const date = new Date();
+    const filepath = file.path.split('/');
     const userfind: undefined | User = await this.userRepository.findOne({
       id: user.id,
     });
@@ -40,14 +46,14 @@ export class DiaryService {
     dto.createdAt =
       '' +
       date.getFullYear() +
-      String(date.getMonth()).padStart(2, '0') +
-      String(date.getDay()).padStart(2, '0');
+      String(1 + date.getMonth()).padStart(2, '0') +
+      String(date.getDate()).padStart(2, '0');
 
     const data = this.diaryRepository.create(dto);
     data.user = user;
+    data.photo = filepath[1];
 
-    console.log(date.getMonth());
-    //await this.diaryRepository.save(data);
+    await this.diaryRepository.save(data);
   }
 
   public async diaryList(user: User, param: string): Promise<Diary[]> {

@@ -12,6 +12,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiTags } from '@nestjs/swagger';
 import { Token } from 'src/common/decorators/token.decorator';
 import { AuthGuard } from 'src/common/guards/auth.guard';
+import { multerDiskOptions } from 'src/common/multer/multer.options';
 import DataResponse from 'src/common/response/DataResponse';
 import Response from 'src/common/response/response';
 import { loginDto } from './dto/login.dto';

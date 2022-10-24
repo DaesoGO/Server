@@ -5,11 +5,15 @@ import {
   Get,
   Param,
   Post,
+  UploadedFile,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiTags } from '@nestjs/swagger';
 import { Token } from 'src/common/decorators/token.decorator';
 import { AuthGuard } from 'src/common/guards/auth.guard';
+import { multerDiskOptions } from 'src/common/multer/multer.options';
 import DataResponse from 'src/common/response/DataResponse';
 import Response from 'src/common/response/response';
 import { Exercise } from 'src/exercise/entities/exercise.entity';
@@ -30,14 +34,17 @@ export class DiaryController {
   }
 
   @UseGuards(AuthGuard)
+  @UseInterceptors(FileInterceptor('file', multerDiskOptions))
   @Post('/:id')
   async diaryUpload(
     @Token() user: User,
     @Body() dto: diaryDto,
     @Param() param,
+    @UploadedFile() file: Express.Multer.File,
   ): Promise<Response> {
-    await this.diaryService.diaryUpload(user, dto, param.id);
-    console.log('test');
+    console.log(dto);
+    console.log(file);
+    await this.diaryService.diaryUpload(user, dto, param.id, file);
 
     return Response.success('일기 등록 성공');
   }

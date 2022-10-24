@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { MulterModule } from '@nestjs/platform-express';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ExeriseRepository } from 'src/exercise/repositories/exercise.repository';
 import { TokenModule } from 'src/token/token.module';
@@ -15,6 +16,7 @@ import { DiaryRepository } from './repositories/diary.repository';
       UserRepository,
       ExeriseRepository,
     ]),
+    MulterModule.registerAsync({ useFactory: () => ({ dest: './upload' }) }),
     TokenModule,
     UserModule,
   ],

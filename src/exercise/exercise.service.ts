@@ -125,6 +125,7 @@ export class ExerciseService {
   public async findComment(param): Promise<any> {
     return await this.commentRepository.find({
       where: { board: param.boardId, exercise: param.id },
+      relations: ['user'],
     });
   }
 
