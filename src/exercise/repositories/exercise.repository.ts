@@ -6,8 +6,8 @@ export class ExeriseRepository extends Repository<Exercise> {
   public exercisefindtwo(): Promise<Exercise[] | undefined> {
     return this.createQueryBuilder('exercise')
       .select()
-      .where('exercise.title = :title', { title: '팔굽혀 펴기' })
-      .orWhere('exercise.title = :title2', { title2: '스쿼트' })
+      .where('exercise.title = :title', { title: 'pushup' })
+      .orWhere('exercise.title = :title2', { title2: 'squat' })
       .getMany();
   }
 }

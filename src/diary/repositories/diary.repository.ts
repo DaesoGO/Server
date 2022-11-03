@@ -5,7 +5,7 @@ import { Diary } from '../entities/diary.entitiy';
 export class DiaryRepository extends Repository<Diary> {
   public findListInfo(userId: string): Promise<Diary[] | undefined> {
     return this.createQueryBuilder('diary')
-      .select(['diary.id', 'diary.photo', 'diary.createdAt'])
+      .select(['diary.id', 'diary.photo', 'diary.createdAt', 'diary.photo'])
       .where('diary.FK_user = :userId', { userId })
       .getMany();
   }

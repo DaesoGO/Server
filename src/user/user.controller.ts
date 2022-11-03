@@ -62,10 +62,4 @@ export class UserController {
   async test(@Token() user: User): Promise<void> {
     console.log(user);
   }
-
-  @Post('upload')
-  @UseInterceptors(FileInterceptor('file'))
-  uplaodFile(@UploadedFile() file: Express.Multer.File) {
-    console.log(file);
-  }
 }
