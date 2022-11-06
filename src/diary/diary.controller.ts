@@ -90,4 +90,16 @@ export class DiaryController {
 
     return Response.success('일기가 성공적으로 삭제되었습니다.');
   }
+
+  @UseGuards(AuthGuard)
+  @Get('/record/:user/:id')
+  async record(@Param() param): Promise<DataResponse<Diary[]>> {
+    const list = await this.diaryService.record(param);
+
+    return DataResponse.dataSuccesss('불러오기 성공', list);
+  }
+
+  //@UseGuards(AuthGuard)
+  // @Get('search/:id')
+  // async search(@Param() param) : Promise<
 }

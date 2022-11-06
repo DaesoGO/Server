@@ -17,6 +17,18 @@ export class DiaryRepository extends Repository<Diary> {
       .getOne();
   }
 
+  public async findfilter(
+    userId: string,
+    number: number,
+  ): Promise<Diary[] | undefined> {
+    return this.createQueryBuilder('diary')
+      .select(['diary.id', 'diary.photo', 'diary.createdAt', 'diary.photo'])
+      .where('diary.FK_user = :userId', { userId })
+      .take(number + 10)
+      .skip(number)
+      .getMany();
+  }
+
   //    public async findtesting(sex : string){
   //     const test = thist.createQueryBuilder("user")
   //     .where("user.registered = :registered", { registered: true })

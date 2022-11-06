@@ -127,4 +127,8 @@ export class DiaryService {
 
     await this.diaryRepository.remove(diary);
   }
+
+  public async record(param): Promise<Diary[]> {
+    return await this.diaryRepository.findfilter(param.user, param.id);
+  }
 }
